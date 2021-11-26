@@ -1,4 +1,5 @@
-import ink.moku.Config;
+package ink.moku;
+
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.GlobalEventChannel;
@@ -10,7 +11,7 @@ public final class InfoMain extends JavaPlugin {
     public static final InfoMain INSTANCE = new InfoMain();
 
     private InfoMain() {
-        super(new JvmPluginDescriptionBuilder("ink.moku.plugin", "1.0")
+        super(new JvmPluginDescriptionBuilder("ink.moku.plugin.mogogoinfo", "1.0")
                 .name("MogogoInfo")
                 .author("Vikot106")
                 .build());
@@ -27,6 +28,7 @@ public final class InfoMain extends JavaPlugin {
     public void handleMsg(MessageEvent msg){
         if(msg.getMessage().toString().startsWith("#")){
             String cmd = msg.getMessage().toString().substring(1);
+
         }
     }
 }

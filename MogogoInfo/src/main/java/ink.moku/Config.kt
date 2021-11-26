@@ -10,7 +10,4 @@ object Config : AutoSavePluginConfig("InfoConfig"){
 
     @ValueDescription("触发关键字")
     val keyWord: MutableMap<Int,String> = emptyMap<Int,String>() as MutableMap<Int, String>
-
-    @ValueDescription("回复")
-    val reply: MutableMap<Int,String> = emptyMap<Int,String>() as MutableMap<Int, String>
 }

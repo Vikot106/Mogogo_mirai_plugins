@@ -1,8 +1,12 @@
 package ink.moku;
 
+import net.mamoe.mirai.Mirai;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.contact.Contact;
+import net.mamoe.mirai.contact.Friend;
+import net.mamoe.mirai.contact.Member;
+import net.mamoe.mirai.contact.UserOrBot;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.events.*;
@@ -30,9 +34,11 @@ public final class CoreMain extends JavaPlugin {
     }
 
     public void handleNudge(NudgeEvent e) {
-        Contact contact = e.getSubject();
-        Nudge nudge = contact.getBot().nudge();
-        nudge.sendTo(contact);
+        if(e.getTarget().equals(e.getBot())){
+            getLogger().info("被拍了");
+            Nudge nudge = e.getFrom().nudge();
+            nudge.sendTo((Contact) e.getFrom());
+        }
     }
 
     public void handleFR(NewFriendRequestEvent e) {

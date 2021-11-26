@@ -4,14 +4,20 @@ import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.events.*;
+import net.mamoe.mirai.message.data.Image;
+import net.mamoe.mirai.message.data.Message;
+import net.mamoe.mirai.message.data.MessageUtils;
+import net.mamoe.mirai.utils.ExternalResource;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public final class SayMain extends JavaPlugin {
     public static final SayMain INSTANCE = new SayMain();
 
     private SayMain() {
-        super(new JvmPluginDescriptionBuilder("ink.moku.plugin", "1.0")
+        super(new JvmPluginDescriptionBuilder("ink.moku.plugin.mogogosay", "1.0")
                 .name("MogogoSay")
                 .author("Vikot106")
                 .build());
@@ -26,9 +32,22 @@ public final class SayMain extends JavaPlugin {
 
     //说xxx，叫xxx
     public void handleMsg(MessageEvent msg) {
-        if (msg.getMessage().serializeToMiraiCode().startsWith("[mirai:at:" + msg.getBot().getId() + "]")) {
+        String msgContent = msg.getMessage().serializeToMiraiCode();
+        if (msg.getMessage().toString().contains("色色")) {
+            File file = new File("./mogogo\\say\\pic\\{BD01C154-5E58-6195-8BFB-47FEEA7A1EED}.jpg");
+            ExternalResource er = ExternalResource.create(file);
+            Image image = msg.getSender().uploadImage(er);
+            Message message = MessageUtils.newChain();
+            message=message.plus(image);
+            msg.getSubject().sendMessage(message);
+            try {
+                er.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (msgContent.startsWith("[mirai:at:" + msg.getBot().getId() + "]")) {
             //是否at机器人开头
-            String msgContent = msg.getMessage().serializeToMiraiCode();
             if (msgContent.contains("叫")) {
                 String[] parts = msgContent.split("叫", 2);
                 msg.getSubject().sendMessage(parts[1]);
