@@ -52,12 +52,16 @@ public final class SayMain extends JavaPlugin {
                 String[] parts = msgContent.split("叫", 2);
                 msg.getSubject().sendMessage(parts[1]);
             } else if (msgContent.contains("说")) {
-                String[] parts = msgContent.split("说", 2);
-                msg.getSubject().sendMessage(reverse(parts[1], '我', '你'));
+                try {
+                    String[] parts = msgContent.split("说", 2);
+                    msg.getSubject().sendMessage(reverse(parts[1], '我', '你'));
+                }catch (Exception e){
+                    msg.getSubject().sendMessage("？你这说个寂寞");
+                }
             } else {
                 String reply = "?";
                 Random r = new Random();
-                int i = r.nextInt(6);
+                int i = r.nextInt(7);
                 switch (i) {
                     case 0:
                         reply = "？";
