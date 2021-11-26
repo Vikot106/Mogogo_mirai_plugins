@@ -19,19 +19,8 @@ public final class SayMain extends JavaPlugin {
     public void onEnable() {
         GlobalEventChannel.INSTANCE.subscribeAlways(GroupMessageEvent.class, this::handleMsg);
         GlobalEventChannel.INSTANCE.subscribeAlways(FriendMessageEvent.class, this::handleMsg);
-//        GlobalEventChannel.INSTANCE.subscribeAlways(NudgeEvent.class, this::handleNudge);
-//        GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, this::handleFR);
         getLogger().info("MogogoSay加载成功！");
     }
-
-//    private void handleFR(NewFriendRequestEvent e) {
-//        e.accept();
-//        e.
-//    }
-//
-//    private void handleNudge(NudgeEvent e) {
-//        e.getSubject().
-//    }
 
     //说xxx，叫xxx
     public void handleMsg(MessageEvent msg) {
