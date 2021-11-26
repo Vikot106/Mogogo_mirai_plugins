@@ -12,7 +12,7 @@ public final class CoreMain extends JavaPlugin {
     public static final CoreMain INSTANCE = new CoreMain();
 
     private CoreMain() {
-        super(new JvmPluginDescriptionBuilder("ink.moku.plugin", "1.0")
+        super(new JvmPluginDescriptionBuilder("ink.moku.plugin.mogogocore", "1.0")
                 .name("MogogoCore")
                 .author("Vikot106")
                 .build());
@@ -20,34 +20,44 @@ public final class CoreMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("MogogoCore加载成功！");
         GlobalEventChannel.INSTANCE.subscribeAlways(NudgeEvent.class, this::handleNudge);
         GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, this::handleFR);
         GlobalEventChannel.INSTANCE.subscribeAlways(FriendAddEvent.class, this::handleFA);
         GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, this::handleGR);
         GlobalEventChannel.INSTANCE.subscribeAlways(BotJoinGroupEvent.class, this::handleGA);
+        getLogger().info("MogogoCore加载成功！");
 
     }
 
-    public void handleNudge(NudgeEvent e){
+    public void handleNudge(NudgeEvent e) {
         Contact contact = e.getSubject();
         Nudge nudge = contact.getBot().nudge();
         nudge.sendTo(contact);
     }
 
-    public void handleFR(NewFriendRequestEvent e){
+    public void handleFR(NewFriendRequestEvent e) {
         e.accept();
     }
 
-    public void handleFA(FriendAddEvent e){
+    public void handleFA(FriendAddEvent e) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         e.getFriend().sendMessage("( •̀ ω •́ )~✧");
     }
 
-    public void handleGR(BotInvitedJoinGroupRequestEvent e){
+    public void handleGR(BotInvitedJoinGroupRequestEvent e) {
         e.accept();
     }
 
-    public void handleGA(BotJoinGroupEvent e){
+    public void handleGA(BotJoinGroupEvent e) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         e.getGroup().sendMessage("( •̀ ω •́ )~✧");
     }
 }
