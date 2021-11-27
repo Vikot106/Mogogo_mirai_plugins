@@ -37,7 +37,7 @@ public final class CoreMain extends JavaPlugin {
         if(e.getTarget().equals(e.getBot())){
             getLogger().info("被拍了");
             Nudge nudge = e.getFrom().nudge();
-            nudge.sendTo((Contact) e.getFrom());
+            nudge.sendTo(e.getSubject());
         }
     }
 
