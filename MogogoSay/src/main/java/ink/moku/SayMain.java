@@ -34,7 +34,7 @@ public final class SayMain extends JavaPlugin {
     public void handleMsg(MessageEvent msg) {
         String msgContent = msg.getMessage().serializeToMiraiCode();
         if (msg.getMessage().toString().contains("色色")) {
-            File file = new File("./mogogo\\say\\pic\\{BD01C154-5E58-6195-8BFB-47FEEA7A1EED}.jpg");
+            File file = new File("./data/mogogo/say/pic/{BD01C154-5E58-6195-8BFB-47FEEA7A1EED}.jpg");
             ExternalResource er = ExternalResource.create(file);
             Image image = msg.getSender().uploadImage(er);
             Message message = MessageUtils.newChain();
@@ -58,7 +58,37 @@ public final class SayMain extends JavaPlugin {
                 }catch (Exception e){
                     msg.getSubject().sendMessage("？你这说个寂寞");
                 }
-            } else {
+            } else if(msgContent.contains("我要不要")){
+                RandomBollean rb = new RandomBollean();
+                if(rb.getRandom()){
+                    msg.getSubject().sendMessage("要！");
+                }else{
+                    msg.getSubject().sendMessage("不要！");
+                }
+            } else if(msgContent.contains("要不要")){
+                RandomBollean rb = new RandomBollean();
+                if(rb.getRandom()){
+                    msg.getSubject().sendMessage("要！");
+                }else{
+                    msg.getSubject().sendMessage("不要！");
+                }
+            } else if(msgContent.endsWith("吗")||msgContent.endsWith("吗?")||msgContent.endsWith("吗？")){
+                try {
+                    String reply = reverse(msgContent.split("]", 2)[1].trim().split("吗")[0], '我', '你');
+                    msg.getSubject().sendMessage(reply);
+                }catch (Exception e){
+                    msg.getSubject().sendMessage("我不知道你在讲什么");
+                }
+            }else if(msgContent.endsWith("嗎")||msgContent.endsWith("嗎?")||msgContent.endsWith("嗎？")){
+                try {
+                    String reply = reverse(msgContent.split("]", 2)[1].trim().split("嗎")[0], '我', '你');
+                    msg.getSubject().sendMessage(reply);
+                }catch (Exception e){
+                    msg.getSubject().sendMessage("我不知道你在讲什么");
+                }
+            }else if(msgContent.contains("泯默")){
+                msg.getSubject().sendMessage("泯默是小可爱！");
+            }else{
                 String reply = "?";
                 Random r = new Random();
                 int i = r.nextInt(7);
