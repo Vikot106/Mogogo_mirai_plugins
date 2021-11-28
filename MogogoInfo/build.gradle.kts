@@ -13,3 +13,6 @@ repositories {
     maven("https://maven.aliyun.com/repository/public")
     mavenCentral()
 }
+dependencies {
+    implementation("org.json:json:20210307")
+}
